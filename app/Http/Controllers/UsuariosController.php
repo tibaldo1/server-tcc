@@ -122,4 +122,7 @@ public function mostraVaquinhasDoUsuario(){
 public function mostrarUmaVaquinha($id){
     return \DB::select("SELECT *  FROM auxiliars JOIN usuarios on usuarios.cpf = auxiliars.cpf JOIN vaquinhas on auxiliars.id_vaquinha = vaquinhas.id_vaquinha WHERE usuarios.cpf=1 and auxiliars.id_vaquinha=$id;");
 }
+public function teste(){
+    echo 'teste';
+}
 }
