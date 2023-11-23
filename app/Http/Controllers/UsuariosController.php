@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Auxiliar;
 use App\Models\Usuario;
+use App\Models\Vaquinha;
 use Illuminate\Http\Request;
 
 class UsuariosController extends Controller
@@ -100,10 +101,19 @@ class UsuariosController extends Controller
         $auxiliar->save();
         return "vaquinha user atualizada com sucesso";
    }
-   public function destroy_user_vaquinha(Auxiliar $auxiliar,string $id){
-    Auxiliar::destroy($id);
-    return "vaquinha user removida com sucesso";
+   public function destroy_user_vaquinha(string $id){
+    $auxiliar = Auxiliar::where('id_vaquinha', $id)->first();
+
+    if ($auxiliar) {
+        $auxiliar->delete();
+        Vaquinha::destroy($id);
+        return "Vaquinha e registros associados removidos com sucesso";
+    }
+
+    Vaquinha::destroy($id);
+    return "Vaquinha removida com sucesso";
 }
+
 
 public function mostraVaquinhasDoUsuario(){
         return \DB::select("SELECT *  FROM auxiliars JOIN usuarios on usuarios.cpf = auxiliars.cpf JOIN vaquinhas on auxiliars.id_vaquinha = vaquinhas.id_vaquinha WHERE usuarios.cpf=1;");

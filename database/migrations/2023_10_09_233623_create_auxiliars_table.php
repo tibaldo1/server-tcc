@@ -19,7 +19,7 @@ class CreateAuxiliarsTable extends Migration
             $table->id();
             $table->string('cpf');
             $table->foreign('cpf')->references('cpf')->on('usuarios');
-            $table->foreignIdFor(Extrato::class, "id_vaquinha")->constrained('vaquinhas','id_vaquinha');
+            $table->foreignId('id_vaquinha')->constrained('vaquinhas')->onDelete('cascade');
             $table->timestamps();
         });
     }
